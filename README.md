@@ -33,7 +33,7 @@ The final implementation achieved:
 
 ---
 
-# Verification Architecture
+## Verification Architecture
 
 The verification environment includes the following components:
 
@@ -58,7 +58,7 @@ The verification environment includes the following components:
 
 ---
 
-# Verification Scenarios
+## Verification Scenarios
 
 Implemented test scenarios include:
 
@@ -72,7 +72,7 @@ Implemented test scenarios include:
 
 ---
 
-# Project Structure
+## Project Structure
 
 ```bash
 ├── src/
@@ -98,29 +98,29 @@ Implemented test scenarios include:
 │
 └── README.md
 ```
-# SDRAM Design Schematic
+## SDRAM Design Schematic
 
 The following figure illustrates the SDRAM architecture and internal modules used in the verification process.
 
 <p align="center"> <img src="images/sdram_architecture.jpg" width="850"> </p>
 
-# ModelSim Waveform Results
+## ModelSim Waveform Results
 
 The waveform below demonstrates successful SDRAM write/read operations and validates correct timing behavior between the DUV and Golden Model.
 
 <p align="center"> <img src="images/modelsim_waveform.png" width="850"> </p>
 
-# Functional & Code Coverage Report
+## Functional & Code Coverage Report
 
 Coverage analysis was performed using ModelSim coverage tools.
 
-* Final results:
+ Final results:
 
-Functional Coverage: 100%
-Code Coverage: 97.24%
+* Functional Coverage: 100%
+* Code Coverage: 97.24%
 <p align="center"> <img src="images/coverage_report.png" width="700"> </p>
 
-# Tools & Technologies
+## Tools & Technologies
 * SystemVerilog
 * Verilog HDL
 * ModelSim SE-64 2020.4
@@ -128,19 +128,19 @@ Code Coverage: 97.24%
 * Functional Coverage
 * Coverage-Driven Verification
 * 
-# Course Information
+## Course Information
 * Course: HDL Model Verification
 * Instructor: Dr. Siamak Mohammadi
 * University: University of Tehran
 * Semester: Fall 2024
-# Key Achievements
+## Key Achievements
 * Designed a complete reusable verification environment
 * Implemented deterministic and random stimulus generators
 * Developed a cycle-accurate SDRAM Golden Model
 * Built checker and scoreboard modules
 * Achieved full functional coverage
 * Performed comprehensive code coverage analysis
-# License
+## License
 
 This project is intended for educational and academic purposes.
 
