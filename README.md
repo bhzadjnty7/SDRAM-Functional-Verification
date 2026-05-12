@@ -102,7 +102,7 @@ Implemented test scenarios include:
 
 The following figure illustrates the SDRAM architecture and internal modules used in the verification process.
 
-<p align="center"> <img src="images/sdram_architecture.jpg" width="850"> </p>
+<p align="center"> <img src="images/sdram_architecture.jpg" width="700"> </p>
 
 ## ModelSim Waveform Results
 
@@ -119,7 +119,7 @@ Coverage analysis was performed using ModelSim coverage tools.
 * Functional Coverage: 100%
 * Code Coverage: 97.24%
   
-<p align="center"> <img src="images/coverage_report.png" width="700"> </p>
+<p align="center"> <img src="images/coverage_report.png" width="600"> </p>
 
 ## Tools & Technologies
 * SystemVerilog
