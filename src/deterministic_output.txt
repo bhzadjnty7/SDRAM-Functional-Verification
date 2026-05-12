@@ -1,0 +1,101 @@
+starting write operation at time 120
+Time: 176 | tb_HREADY: 0 | tb_HRDATA: xxxxxxxx
+startimg read operation at time 235
+Time:286 | tb_HREADY: 1 | tb_HRDATA: deadbeef
+Starting Burst Write and Read Operation at time 286
+Time:356 | tb_HREADY: 0 | tb_HRDATA: deadbeef
+Time:416 | tb_HREADY: 0 | tb_HRDATA: deadbeef
+Time:476 | tb_HREADY: 0 | tb_HRDATA: deadbeef
+Time:536 | tb_HREADY: 0 | tb_HRDATA: deadbeef
+Time: 596 | tb_HREADY: 1 | tb_HRDATA: deadbeef
+Time: 656 | tb_HREADY: 1 | tb_HRDATA: deadbef0
+Time: 716 | tb_HREADY: 1 | tb_HRDATA: deadbef1
+Time: 776 | tb_HREADY: 1 | tb_HRDATA: deadbef2
+Testing Reset During Operation at time 776
+Time: 885 | tb_HREADY: 0 | tb_HRDATA: deadbef2
+Testing Invalid Commands at time 885
+Time: 945 | tb_HREADY: 1 | tb_HRDATA: deadbef2
+Testing write operation (4 columns in a row) at time 945
+Time: 996 | tb_HREADY: 0 | tb_HRDATA: deadbef2
+Time: 1056 | tb_HREADY: 0 | tb_HRDATA: deadbef2
+Time: 1116 | tb_HREADY: 0 | tb_HRDATA: deadbef2
+Time: 1176 | tb_HREADY: 0 | tb_HRDATA: deadbef2
+Time: 1236 | tb_HREADY: 1 | tb_HRDATA: beeb0000
+Time: 1296 | tb_HREADY: 1 | tb_HRDATA: beeb0001
+Time: 1356 | tb_HREADY: 1 | tb_HRDATA: beeb0002
+Time: 1416 | tb_HREADY: 1 | tb_HRDATA: beeb0003
+Testing write in 4 corners of a bank 1416
+Time: 1476 | tb_HREADY: 0 | tb_HRDATA: beeb0003
+Time: 1536 | tb_HREADY: 0 | tb_HRDATA: beeb0003
+Time: 1596 | tb_HREADY: 0 | tb_HRDATA: beeb0003
+Time: 1656 | tb_HREADY: 0 | tb_HRDATA: beeb0003
+Time: 1716 | tb_HREADY: 1 | tb_HRDATA: ceeb0000
+Time: 1776 | tb_HREADY: 1 | tb_HRDATA: ceeb0001
+Time: 1836 | tb_HREADY: 1 | tb_HRDATA: ceeb0002
+Time: 1896 | tb_HREADY: 1 | tb_HRDATA: ceeb0003
+Testing 5 invalid bits in addr format: 1896
+Starting write operation at time 1896
+Time: 1956 | tb_HREADY: 0 | tb_HRDATA: ceeb0003
+Starting read operation at time 1956
+Time: 2016 | tb_HREADY: 1 | tb_HRDATA: 00000001
+Starting write operation at time 2016
+Time: 2076 | tb_HREADY: 0 | tb_HRDATA: 00000001
+Starting read operation at time 2076
+Time: 2136 | tb_HREADY: 1 | tb_HRDATA: 00000002
+Testing write to the first place of each bank: 2136
+Starting write operation at time 2136
+Time: 2196 | tb_HREADY: 0 | tb_HRDATA: 00000002
+Starting read operation at time 2196
+Time: 2256 | tb_HREADY: 1 | tb_HRDATA: abb01010
+Starting write operation at time 2256
+Time: 2316 | tb_HREADY: 0 | tb_HRDATA: abb01010
+Starting read operation at time 2316
+Time: 2376 | tb_HREADY: 1 | tb_HRDATA: abb01011
+Starting write operation at time 2376
+Time: 2436 | tb_HREADY: 0 | tb_HRDATA: abb01011
+Starting read operation at time 2436
+Time: 2496 | tb_HREADY: 1 | tb_HRDATA: abb01012
+Starting write operation at time 2496
+Time: 2556 | tb_HREADY: 0 | tb_HRDATA: abb01012
+Starting read operation at time 2556
+Time: 2616 | tb_HREADY: 1 | tb_HRDATA: abb01013
+Starting write operation at time 2616
+Time: 2676 | tb_HREADY: 0 | tb_HRDATA: abb01013
+Starting read operation at time 2676
+Time: 2736 | tb_HREADY: 1 | tb_HRDATA: c0895e81
+Starting write operation at time 2736
+Time: 2796 | tb_HREADY: 0 | tb_HRDATA: c0895e81
+Starting read operation at time 2796
+Time: 2856 | tb_HREADY: 1 | tb_HRDATA: b1f05663
+Starting write operation at time 2856
+Time: 2916 | tb_HREADY: 0 | tb_HRDATA: b1f05663
+Starting read operation at time 2916
+Time: 2976 | tb_HREADY: 1 | tb_HRDATA: 46df998d
+Starting write operation at time 2976
+Time: 3036 | tb_HREADY: 0 | tb_HRDATA: 46df998d
+Starting read operation at time 3036
+Time: 3096 | tb_HREADY: 1 | tb_HRDATA: 89375212
+Starting write operation at time 3096
+Time: 3156 | tb_HREADY: 0 | tb_HRDATA: 89375212
+Starting read operation at time 3156
+Time: 3216 | tb_HREADY: 1 | tb_HRDATA: 06d7cd0d
+Starting write operation at time 3216
+Time: 3276 | tb_HREADY: 0 | tb_HRDATA: 06d7cd0d
+Starting read operation at time 3276
+Time: 3336 | tb_HREADY: 1 | tb_HRDATA: 1e8dcd3d
+Starting write operation at time 3336
+Time: 3396 | tb_HREADY: 0 | tb_HRDATA: 1e8dcd3d
+Starting read operation at time 3396
+Time: 3456 | tb_HREADY: 1 | tb_HRDATA: 462df78c
+Starting write operation at time 3456
+Time: 3516 | tb_HREADY: 0 | tb_HRDATA: 462df78c
+Starting read operation at time 3516
+Time: 3576 | tb_HREADY: 1 | tb_HRDATA: e33724c6
+Starting write operation at time 3576
+Time: 3636 | tb_HREADY: 0 | tb_HRDATA: e33724c6
+Starting read operation at time 3636
+Time: 3696 | tb_HREADY: 1 | tb_HRDATA: d513d2aa
+Starting write operation at time 3696
+Time: 3756 | tb_HREADY: 0 | tb_HRDATA: d513d2aa
+Starting read operation at time 3756
+Time: 3816 | tb_HREADY: 1 | tb_HRDATA: bbd27277

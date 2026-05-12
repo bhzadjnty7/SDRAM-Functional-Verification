@@ -1,0 +1,200 @@
+senario 1: random read & write to a random address: 120
+Starting write operation at time 120
+Time: 176 | tb_HREADY: 0 | tb_HRDATA: xxxxxxxx
+Starting read operation at time 176
+Time: 236 | tb_HREADY: 1 | tb_HRDATA: b2d28465
+Starting write operation at time 236
+Time: 296 | tb_HREADY: 0 | tb_HRDATA: b2d28465
+Starting read operation at time 296
+Time: 356 | tb_HREADY: 1 | tb_HRDATA: 65db0fcb
+Starting write operation at time 356
+Time: 416 | tb_HREADY: 0 | tb_HRDATA: 65db0fcb
+Starting read operation at time 416
+Time: 476 | tb_HREADY: 1 | tb_HRDATA: bd00807a
+Starting write operation at time 476
+Time: 536 | tb_HREADY: 0 | tb_HRDATA: bd00807a
+Starting read operation at time 536
+Time: 596 | tb_HREADY: 1 | tb_HRDATA: de344cbc
+Starting write operation at time 596
+Time: 656 | tb_HREADY: 0 | tb_HRDATA: de344cbc
+Starting read operation at time 656
+Time: 716 | tb_HREADY: 1 | tb_HRDATA: e1b764c3
+Starting write operation at time 716
+Time: 776 | tb_HREADY: 0 | tb_HRDATA: e1b764c3
+Starting read operation at time 776
+Time: 836 | tb_HREADY: 1 | tb_HRDATA: 73be9be7
+Starting write operation at time 836
+Time: 896 | tb_HREADY: 0 | tb_HRDATA: 73be9be7
+Starting read operation at time 896
+Time: 956 | tb_HREADY: 1 | tb_HRDATA: f692d8ed
+Starting write operation at time 956
+Time: 1016 | tb_HREADY: 0 | tb_HRDATA: f692d8ed
+Starting read operation at time 1016
+Time: 1076 | tb_HREADY: 1 | tb_HRDATA: bee9687d
+Starting write operation at time 1076
+Time: 1136 | tb_HREADY: 0 | tb_HRDATA: bee9687d
+Starting read operation at time 1136
+Time: 1196 | tb_HREADY: 1 | tb_HRDATA: 22dd0745
+Starting write operation at time 1196
+Time: 1256 | tb_HREADY: 0 | tb_HRDATA: 22dd0745
+Starting read operation at time 1256
+Time: 1316 | tb_HREADY: 1 | tb_HRDATA: 2a064154
+senario 2: write and from an address with random row: 1316
+Starting write operation at time 1316
+Time: 1376 | tb_HREADY: 0 | tb_HRDATA: 2a064154
+Starting read operation at time 1376
+Time: 1436 | tb_HREADY: 1 | tb_HRDATA: deadbeef
+senario3: Test write random data to 4 col's in a row: 1436
+Starting write operation at time 1436
+Time: 1496 | tb_HREADY: 0 | tb_HRDATA: deadbeef
+Starting write operation at time 1496
+Time: 1556 | tb_HREADY: 0 | tb_HRDATA: deadbeef
+Starting write operation at time 1556
+Time: 1616 | tb_HREADY: 0 | tb_HRDATA: deadbeef
+Starting write operation at time 1616
+Time: 1676 | tb_HREADY: 0 | tb_HRDATA: deadbeef
+Starting read operation at time 1676
+Time: 1736 | tb_HREADY: 1 | tb_HRDATA: 9585262b
+Starting read operation at time 1736
+Time: 1796 | tb_HREADY: 1 | tb_HRDATA: a38d5647
+Starting read operation at time 1796
+Time: 1856 | tb_HREADY: 1 | tb_HRDATA: 79dffdf3
+Starting read operation at time 1856
+Time: 1916 | tb_HREADY: 1 | tb_HRDATA: f2fc70e5
+Test random read and write using task with urandom_range: 1916
+Starting write operation at time 1916
+Time: 1976 | tb_HREADY: 0 | tb_HRDATA: f2fc70e5
+Starting read operation at time 1976
+Time: 2036 | tb_HREADY: 1 | tb_HRDATA: 40c04bfb
+Starting write operation at time 2036
+Time: 2096 | tb_HREADY: 0 | tb_HRDATA: 40c04bfb
+Starting read operation at time 2096
+Time: 2156 | tb_HREADY: 1 | tb_HRDATA: f9bd74a2
+Starting write operation at time 2156
+Time: 2216 | tb_HREADY: 0 | tb_HRDATA: f9bd74a2
+Starting read operation at time 2216
+Time: 2276 | tb_HREADY: 1 | tb_HRDATA: 68c470a5
+Starting write operation at time 2276
+Time: 2336 | tb_HREADY: 0 | tb_HRDATA: 68c470a5
+Starting read operation at time 2336
+Time: 2396 | tb_HREADY: 1 | tb_HRDATA: 840d1196
+Starting write operation at time 2396
+Time: 2456 | tb_HREADY: 0 | tb_HRDATA: 840d1196
+Starting read operation at time 2456
+Time: 2516 | tb_HREADY: 1 | tb_HRDATA: 6bf09d17
+Starting write operation at time 2516
+Time: 2576 | tb_HREADY: 0 | tb_HRDATA: 6bf09d17
+Starting read operation at time 2576
+Time: 2636 | tb_HREADY: 1 | tb_HRDATA: 24b5be83
+Starting write operation at time 2636
+Time: 2696 | tb_HREADY: 0 | tb_HRDATA: 24b5be83
+Starting read operation at time 2696
+Time: 2756 | tb_HREADY: 1 | tb_HRDATA: 23dca814
+senario 5: test invalid HWRITE signal during write operation: 2756
+start write operation: 2756
+Time: 2816 | tb_HREADY: 1 | tb_HRDATA: 23dca814
+start read operation: 2816
+Time: 2876 | tb_HREADY: 1 | tb_HRDATA: xxxxxxxx
+senario 6: test invalid HWRITE signal during write operation: 2876
+start write operation: 2876
+Time: 2936 | tb_HREADY: 1 | tb_HRDATA: xxxxxxxx
+start read operation: 2936
+Time: 2996 | tb_HREADY: 1 | tb_HRDATA: xxxxxxxx
+senario 7: invalid HWRITE & HSEL: 2996
+start invalid operation: 2996
+Time: 3056 | tb_HREADY: 1 | tb_HRDATA: xxxxxxxx
+start invalid operation: 3056
+Time: 3116 | tb_HREADY: 1 | tb_HRDATA: xxxxxxxx
+senario 8: random reset during write/read operation: 3116
+test reset during write/read operation: 3116
+start write operation: 3116
+Time: 3176 | tb_HREADY: 0 | tb_HRDATA: xxxxxxxx
+start read operation: 3176
+Time: 3236 | tb_HREADY: 0 | tb_HRDATA: xxxxxxxx
+test reset during write/read operation: 3236
+start write operation: 3236
+Time: 3296 | tb_HREADY: 0 | tb_HRDATA: xxxxxxxx
+start read operation: 3296
+Time: 3356 | tb_HREADY: 0 | tb_HRDATA: xxxxxxxx
+senario 9: test reset during write/read operation different time sequences: 3356
+start write operation: 3356
+Time: 3416 | tb_HREADY: 0 | tb_HRDATA: xxxxxxxx
+start read operation: 3416
+Time: 3476 | tb_HREADY: 0 | tb_HRDATA: xxxxxxxx
+senario 9: test reset during write/read operation different time sequences: 3476
+start write operation: 3476
+Time: 3536 | tb_HREADY: 0 | tb_HRDATA: xxxxxxxx
+start read operation: 3536
+Time: 3596 | tb_HREADY: 0 | tb_HRDATA: xxxxxxxx
+senario 10: test HSEL=0 during write/read different time sequences: 3596
+start write operation: 3596
+Time: 3656 | tb_HREADY: 1 | tb_HRDATA: xxxxxxxx
+start read operation: 3656
+Time: 3716 | tb_HREADY: 1 | tb_HRDATA: xxxxxxxx
+senario 11: test HSEL=0 during write/read different time sequences: 3716
+start write operation: 3716
+Time: 3776 | tb_HREADY: 1 | tb_HRDATA: xxxxxxxx
+start read operation: 3776
+Time: 3836 | tb_HREADY: 1 | tb_HRDATA: xxxxxxxx
+senario 12: Test invalid bank select value: 3836
+start write operation: 3836
+Starting write operation at time 3836
+Time: 3896 | tb_HREADY: 0 | tb_HRDATA: xxxxxxxx
+Starting read operation at time 3896
+Time: 3956 | tb_HREADY: 1 | tb_HRDATA: xxxxxxxx
+senario 13: test reset during write/read operation different time sequences: 3956
+start write operation: 3956
+Time: 4016 | tb_HREADY: 0 | tb_HRDATA: xxxxxxxx
+start read operation: 4016
+Time: 4076 | tb_HREADY: 0 | tb_HRDATA: xxxxxxxx
+senario 13: test reset during write/read operation different time sequences: 4076
+start write operation: 4076
+Time: 4136 | tb_HREADY: 0 | tb_HRDATA: xxxxxxxx
+start read operation: 4136
+Time: 4196 | tb_HREADY: 0 | tb_HRDATA: xxxxxxxx
+senario 14: fully randomized operation: 4196
+Time: 4256 | tb_HREADY: 1 | tb_HRDATA: xxxxxxxx
+senario 14: fully randomized operation: 4256
+Time: 4316 | tb_HREADY: 1 | tb_HRDATA: xxxxxxxx
+senario 14: fully randomized operation: 4316
+Time: 4376 | tb_HREADY: 1 | tb_HRDATA: xxxxxxxx
+senario 14: fully randomized operation: 4376
+Time: 4436 | tb_HREADY: 0 | tb_HRDATA: xxxxxxxx
+senario 14: fully randomized operation: 4436
+Time: 4496 | tb_HREADY: 0 | tb_HRDATA: xxxxxxxx
+senario 14: fully randomized operation: 4496
+Time: 4556 | tb_HREADY: 0 | tb_HRDATA: xxxxxxxx
+senario 14: fully randomized operation: 4556
+Time: 4616 | tb_HREADY: 0 | tb_HRDATA: xxxxxxxx
+senario 14: fully randomized operation: 4616
+Time: 4676 | tb_HREADY: 0 | tb_HRDATA: xxxxxxxx
+senario 14: fully randomized operation: 4676
+Time: 4736 | tb_HREADY: 1 | tb_HRDATA: xxxxxxxx
+senario 15: additional TC to cover line 76 controller: 4736
+start random operation: 4736
+Time: 4796 | tb_HREADY: 1 | tb_HRDATA: xxxxxxxx
+start random operation: 4796
+Time: 4856 | tb_HREADY: 1 | tb_HRDATA: xxxxxxxx
+start random operation: 4856
+Time: 4916 | tb_HREADY: 1 | tb_HRDATA: xxxxxxxx
+start random operation: 4916
+Time: 4976 | tb_HREADY: 1 | tb_HRDATA: xxxxxxxx
+start random operation: 4976
+Time: 5036 | tb_HREADY: 1 | tb_HRDATA: xxxxxxxx
+start random operation: 5036
+Time: 5096 | tb_HREADY: 1 | tb_HRDATA: xxxxxxxx
+start random operation: 5096
+Time: 5156 | tb_HREADY: 1 | tb_HRDATA: xxxxxxxx
+start random operation: 5156
+Time: 5216 | tb_HREADY: 1 | tb_HRDATA: xxxxxxxx
+start random operation: 5216
+Time: 5276 | tb_HREADY: 1 | tb_HRDATA: xxxxxxxx
+start random operation: 5276
+Time: 5336 | tb_HREADY: 1 | tb_HRDATA: xxxxxxxx
+senario 15: multiple write to an address then read from it: 5336
+Starting write operation at time 5336
+Time: 5396 | tb_HREADY: 0 | tb_HRDATA: xxxxxxxx
+Starting write operation at time 5396
+Time: 5456 | tb_HREADY: 0 | tb_HRDATA: xxxxxxxx
+Starting read operation at time 5456
+Time: 5516 | tb_HREADY: 1 | tb_HRDATA: ddf26ebb

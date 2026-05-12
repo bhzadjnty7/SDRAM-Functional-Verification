@@ -1,0 +1,130 @@
+D:/codeverify1/mips.v {1 {vlog -work work -vopt -stats=none D:/codeverify1/mips.v
+Model Technology ModelSim SE-64 vlog 2020.4 Compiler 2020.10 Oct 13 2020
+-- Compiling module mips
+
+Top level modules:
+	mips
+
+} {} {}} D:/codeverify1/pipe_aluPlusbranch.v {1 {vlog -work work -vopt -stats=none D:/codeverify1/pipe_aluPlusbranch.v
+Model Technology ModelSim SE-64 vlog 2020.4 Compiler 2020.10 Oct 13 2020
+-- Compiling module line_int_branch
+
+Top level modules:
+	line_int_branch
+
+} {} {}} D:/codeverify1/FETCH.v {1 {vlog -work work -vopt -stats=none D:/codeverify1/FETCH.v
+Model Technology ModelSim SE-64 vlog 2020.4 Compiler 2020.10 Oct 13 2020
+-- Compiling module fetch
+
+Top level modules:
+	fetch
+
+} {} {}} D:/codeverify1/EXECUTE.v {1 {vlog -work work -vopt -stats=none D:/codeverify1/EXECUTE.v
+Model Technology ModelSim SE-64 vlog 2020.4 Compiler 2020.10 Oct 13 2020
+-- Compiling module execute
+
+Top level modules:
+	execute
+
+} {} {}} D:/codeverify1/mips_elements.v {1 {vlog -work work -vopt -stats=none D:/codeverify1/mips_elements.v
+Model Technology ModelSim SE-64 vlog 2020.4 Compiler 2020.10 Oct 13 2020
+-- Compiling module mux3_to_1
+-- Compiling module mux2_to_1
+-- Compiling module mux4_to_1
+-- Compiling module mux7_to_1
+-- Compiling module sign_extension
+-- Compiling module shl2
+-- Compiling module adder
+-- Compiling module alu
+-- Compiling module reg_file
+-- Compiling module data_memory
+-- Compiling module pc
+
+Top level modules:
+	mux3_to_1
+	mux2_to_1
+	mux4_to_1
+	mux7_to_1
+	sign_extension
+	shl2
+	adder
+	alu
+	reg_file
+	data_memory
+	pc
+
+} {} {}} D:/codeverify1/Tb.v {1 {vlog -work work -vopt -stats=none D:/codeverify1/Tb.v
+Model Technology ModelSim SE-64 vlog 2020.4 Compiler 2020.10 Oct 13 2020
+-- Compiling module tb
+
+Top level modules:
+	tb
+
+} {} {}} D:/codeverify1/decoder.v {1 {vlog -work work -vopt -stats=none D:/codeverify1/decoder.v
+Model Technology ModelSim SE-64 vlog 2020.4 Compiler 2020.10 Oct 13 2020
+-- Compiling module inst_memory
+-- Compiling module decoder
+-- Compiling module get_registers_for_pipe
+-- Compiling module stall_for_branches_has_dependency_with_ex_ins
+
+Top level modules:
+	inst_memory
+	decoder
+	get_registers_for_pipe
+	stall_for_branches_has_dependency_with_ex_ins
+
+} {} {}} D:/codeverify1/datapath.v {1 {vlog -work work -vopt -stats=none D:/codeverify1/datapath.v
+Model Technology ModelSim SE-64 vlog 2020.4 Compiler 2020.10 Oct 13 2020
+-- Compiling module data_path
+
+Top level modules:
+	data_path
+
+} {} {}} D:/codeverify1/selectLine.v {1 {vlog -work work -vopt -stats=none D:/codeverify1/selectLine.v
+Model Technology ModelSim SE-64 vlog 2020.4 Compiler 2020.10 Oct 13 2020
+-- Compiling module select_line
+
+Top level modules:
+	select_line
+
+} {} {}} D:/codeverify1/nopItructionMuxes.v {1 {vlog -work work -vopt -stats=none D:/codeverify1/nopItructionMuxes.v
+Model Technology ModelSim SE-64 vlog 2020.4 Compiler 2020.10 Oct 13 2020
+-- Compiling module NopIntructionMuxes
+
+Top level modules:
+	NopIntructionMuxes
+
+} {} {}} D:/codeverify1/opcode_and_inst.v {1 {vlog -work work -vopt -stats=none D:/codeverify1/opcode_and_inst.v
+Model Technology ModelSim SE-64 vlog 2020.4 Compiler 2020.10 Oct 13 2020
+
+} {} {}} D:/codeverify1/pipe_loadStore.v {1 {vlog -work work -vopt -stats=none D:/codeverify1/pipe_loadStore.v
+Model Technology ModelSim SE-64 vlog 2020.4 Compiler 2020.10 Oct 13 2020
+-- Compiling module line_int_memory
+
+Top level modules:
+	line_int_memory
+
+} {} {}} D:/codeverify1/DECODE.v {1 {vlog -work work -vopt -stats=none D:/codeverify1/DECODE.v
+Model Technology ModelSim SE-64 vlog 2020.4 Compiler 2020.10 Oct 13 2020
+-- Compiling module decode
+
+Top level modules:
+	decode
+
+} {} {}} D:/codeverify1/register.v {1 {vlog -work work -vopt -stats=none D:/codeverify1/register.v
+Model Technology ModelSim SE-64 vlog 2020.4 Compiler 2020.10 Oct 13 2020
+-- Compiling module register
+
+Top level modules:
+	register
+
+} {} {}} D:/codeverify1/cntrlr.v {1 {vlog -work work -vopt -stats=none D:/codeverify1/cntrlr.v
+Model Technology ModelSim SE-64 vlog 2020.4 Compiler 2020.10 Oct 13 2020
+-- Compiling module controller
+-- Compiling module select_mux_ABsrc
+
+Top level modules:
+	controller
+	select_mux_ABsrc
+
+} {} {}}

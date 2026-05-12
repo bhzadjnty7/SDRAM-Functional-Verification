@@ -1,0 +1,57 @@
+module sdram_scoreboard (
+    input logic        in_HCLK,
+    input logic        in_HRESET,
+    input logic        in_HWRITE,     // Write Enable
+    input logic        in_HSEL,       // Select Signal
+    input logic [31:0] in_HADDR,      // Address
+    input logic [31:0] in_HWDATA,     // Write Data
+    input logic        out_HREADY,    // Ready Signal
+    input logic [31:0] out_HRDATA,    // Read Data
+
+    output logic [31:0] total_transactions, // Total transactions (read + write)
+    output logic [31:0] read_transactions,  // Total read transactions
+    output logic [31:0] write_transactions,  // Total write transactions
+    output logic [31:0] invalid_transactions
+);
+    integer sfile;
+
+    initial begin
+        sfile = $fopen("scoreboard_transactions.txt", "w");
+        invalid_transactions = 0;
+        write_transactions = 0;
+        read_transactions = 0;
+        total_transactions = 0;
+    end
+
+    // Sequential logic to track transactions
+    always @(posedge in_HCLK or posedge in_HRESET) begin
+           if (in_HRESET) begin
+               read_transactions = read_transactions;
+               write_transactions = write_transactions;
+               invalid_transactions = invalid_transactions;
+               total_transactions = total_transactions;
+                // Count transactions based on HREADY and other input signals
+              end else if (in_HSEL && in_HWRITE) begin
+                // Write transaction
+                write_transactions = write_transactions + 1;
+                $fwrite(sfile, "write_operation: | Time : %0t | HWDATA : %h | HADDR: %h\n", $time, in_HWDATA, in_HADDR);
+              end else if (in_HSEL && !in_HWRITE) begin
+                // Read transaction
+                read_transactions = read_transactions + 1;
+                $fwrite(sfile, "read_operation: | Time : %0t | HRDATA : %h | HADDR: %h\n", $time, out_HRDATA, in_HADDR);
+              end else begin
+                // Invalid transaction
+                invalid_transactions = invalid_transactions + 1;
+                $fwrite(sfile, "invalid_operation: | Time : %0t | HRDATA : %h | HWDATA: %h | HADDR: %h\n", $time, out_HRDATA, in_HWDATA, in_HADDR);
+            end
+            // Update total transactions
+            total_transactions = read_transactions + write_transactions + invalid_transactions;
+        end
+
+    // Final block to close the file
+    final begin
+        $fclose(sfile);
+    end
+
+endmodule
+
