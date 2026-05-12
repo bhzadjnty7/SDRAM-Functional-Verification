@@ -29,7 +29,7 @@ The verification environment was incrementally developed through multiple projec
 - Functional coverage collection
 - Code coverage analysis
 
-  <p align="center"> <img src="images/random_constraint.jpg" width="700"> </p>
+  <p align="center"> <img src="images/random_constraint.png" width="700"> </p>
 
 The final implementation achieved:
 
