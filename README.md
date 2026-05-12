@@ -118,6 +118,7 @@ Coverage analysis was performed using ModelSim coverage tools.
 
 * Functional Coverage: 100%
 * Code Coverage: 97.24%
+  
 <p align="center"> <img src="images/coverage_report.png" width="700"> </p>
 
 ## Tools & Technologies
