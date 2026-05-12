@@ -1,0 +1,152 @@
+module Golden_Model_sdram(
+    input        HCLK,         // Clock signal
+    input        HRESET,       // Reset signal
+    input        HWRITE,       // Write Enable (1 = write, 0 = read)
+    input        HSEL,         // Select signal
+    input [31:0] HWDATA,       // Write data
+    input [31:0] HADDR,        // Address
+
+    output reg        HREADY,  // Ready signal
+    output reg [31:0] HRDATA   // Read data
+);
+
+    // SDRAM Parameters
+    parameter DATA_WIDTH = 32;
+    parameter ROWS = 16384;    // Number of rows (14-bit addressing)
+    parameter COLUMNS = 512;  // Number of columns (9-bit addressing)
+    parameter BANKS = 4;      // Number of banks (2-bit addressing)
+
+    // SDRAM Memory Array
+    reg [DATA_WIDTH-1:0] sdram_memory [0:BANKS-1][0:ROWS-1][0:COLUMNS-1];
+
+    // Address Decoding
+    reg [1:0] active_bank;
+    reg [13:0] active_row;
+    reg [8:0] active_column;
+
+    // FSM States
+    typedef enum logic [2:0] {
+        IDLE,           // Idle state
+        Read_ACT,       // Row activation for read
+        Write_ACT,      // Row activation for write
+        NOP1,           // No operation after row activation
+        CAS,            // Column activation
+        NOP2,           // No operation after column activation
+        NOP3            // Final no operation before returning to IDLE
+    } state_t;
+
+    state_t current_state, next_state;
+
+    // Temporary Buffer for Read/Write Operations
+    reg [31:0] data_buffer;
+
+    // FSM Sequential Logic
+    always @(posedge HCLK or posedge HRESET) begin
+        if (HRESET) begin
+            current_state <= IDLE;
+            HREADY <= 1'b1;
+            HRDATA <= 32'b0;
+        end else begin
+            current_state <= next_state;
+        end
+    end
+
+    // FSM Next State Logic
+    always @(*) begin
+        // Default next state
+        next_state = current_state;
+
+        case (current_state)
+            IDLE: begin
+                if (HSEL && HWRITE) begin
+                    next_state = Write_ACT;  // Write request
+                end else if (HSEL && !HWRITE) begin
+                    next_state = Read_ACT;   // Read request
+                end
+            end
+
+            Read_ACT: begin
+                next_state = NOP1;
+            end
+
+            Write_ACT: begin
+                next_state = NOP1;
+            end
+
+            NOP1: begin
+                next_state = CAS;
+            end
+
+            CAS: begin
+                next_state = NOP2;
+            end
+
+            NOP2: begin
+                next_state = NOP3;
+            end
+
+            NOP3: begin
+                next_state = IDLE;
+            end
+        endcase
+    end
+
+    // FSM Output Logic
+    always @(posedge HCLK) begin
+        if (HRESET) begin
+            // Reset internal registers
+            active_row <= 14'b0;
+            active_column <= 9'b0;
+            active_bank <= 2'b0;
+            HRDATA <= 32'b0;
+            data_buffer <= 32'b0;
+            HREADY <= 1'b1;
+        end else begin
+            case (current_state)
+                IDLE: begin
+                    HREADY <= 1'b1; // Ready in IDLE state
+                end
+
+                Read_ACT: begin
+                    // Decode row and bank address
+                    active_bank <= HADDR[15:14];
+                    active_row <= HADDR[13:0];
+                    HREADY <= 1'b0; // Not ready during row activation
+                end
+
+                Write_ACT: begin
+                    // Decode row and bank address
+                    active_bank <= HADDR[15:14];
+                    active_row <= HADDR[13:0];
+                    HREADY <= 1'b0; // Not ready during row activation
+                end
+
+                NOP1: begin
+                    HREADY <= 1'b0; // Not ready during NOP1
+                end
+
+                CAS: begin
+                    // Decode column address
+                    active_column <= HADDR[24:16];
+                    HREADY <= 1'b0; // Not ready during column activation
+                end
+
+                NOP2: begin
+                    HREADY <= 1'b0; // Not ready during NOP2
+                end
+
+                NOP3: begin
+                    if (HWRITE) begin
+                        // Write operation: Store data in memory
+                        sdram_memory[active_bank][active_row][active_column] <= HWDATA;
+                    end else begin
+                        // Read operation: Retrieve data from memory
+                        HRDATA <= sdram_memory[active_bank][active_row][active_column];
+                    end
+                    HREADY <= 1'b1; // Ready after operation completion
+                end
+            endcase
+        end
+    end
+
+endmodule

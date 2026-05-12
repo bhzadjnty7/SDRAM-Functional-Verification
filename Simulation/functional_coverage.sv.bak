@@ -1,0 +1,50 @@
+module functional_coverage(
+       input tb_HCLK,
+       input tb_HSEL,
+       input tb_HWRITE,
+       input tb_HRESET,
+       input tb_HREADY,
+       input [31:0] tb_HWDATA,
+       input [31:0] tb_HRDATA,
+       input [31:0] tb_HADDR
+);
+   // functional coverage code
+   covergroup func_coverage @(posedge tb_HCLK);
+       coverpoint tb_HCLK {
+           bins all_values = {[0:$]};
+       }
+       coverpoint tb_HWRITE {
+           bins read = {0};
+           bins write = {1};
+       }
+       coverpoint tb_HADDR {
+           bins all_values = {[0:$]};
+       }
+       coverpoint tb_HWDATA {
+           bins all_values = {[0:$]};
+       }
+       coverpoint tb_HRDATA {
+           bins all_values = {[0:$]};
+       }
+       coverpoint tb_HSEL {
+           bins hsel_high = {1};
+           bins hsel_low = {0};
+       }
+   endgroup
+       coverpoint tb_HREADY {
+           bins ready_high = {1};
+           bins ready_low = {0};
+       }
+   endgroup
+       coverpoint tb_HRESET {
+           bins reset_high = {1};
+           bins reset_low = {0};
+       }
+   endgroup
+    // Instantiate Coverage Groups
+    func_coverage func_cov = new();
+     initial begin
+        // Initialize coverage
+       func_cov.sample();
+    end
+endmodule

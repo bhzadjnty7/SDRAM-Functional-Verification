@@ -1,0 +1,312 @@
+
+module sdram_top_tb();
+    reg [31:0] address; //defined for giving the input for addr_generator fuction
+    // Testbench signals
+    reg        tb_HCLK;
+    reg        tb_HRESET;
+    reg        tb_HWRITE;
+    reg        tb_HSEL;
+    reg [31:0] tb_HWDATA;
+    reg [31:0] tb_HADDR;
+    
+    wire        tb_HREADY;
+    wire [31:0] tb_HRDATA;
+    
+    integer file; //File handle for logging
+
+    // define a parameter for the number of addresses
+    parameter NUM_ADDRESSES = 4;
+
+    //declare a register array to hold the addresses
+    reg [31:0] addresses [0:NUM_ADDRESSES-1];
+        
+    
+    // Instance of design under test
+    sdram_top DUT (
+        .in_HCLK(tb_HCLK),
+        .in_HRESET(tb_HRESET),
+        .in_HWRITE(tb_HWRITE),
+        .in_HSEL(tb_HSEL),
+        .in_HWDATA(tb_HWDATA),
+        .in_HADDR(tb_HADDR),
+        .out_HREADY(tb_HREADY),
+        .out_HRDATA(tb_HRDATA)
+    );
+
+    // Function to generate a 32-bit address
+    function [31:0] generate_address(
+        input [4:0] invalid_bits,        // 5 bits for invalid
+        input [8:0] column_address,      // 9 bits for column address
+        input [1:0] bank_select,         // 2 bits for bank select
+        input [13:0] row_address         // 14 bits for row address
+     );
+        begin
+             generate_address = {2'b10,   // Memory map I/O fixed to "10"
+                                 invalid_bits,
+                                 column_address,
+                                 bank_select,
+                                 row_address};
+         end
+    endfunction
+
+    task write_operation(input [31:0] addr, input [31:0] data, integer file); //define a task for write operation
+         begin
+              $display("Starting Write Operation at time %0t", $time);
+              $fwrite(file, "Starting write operation at time %0t\n", $time);
+        
+              @(posedge tb_HCLK);
+              tb_HSEL = 1;
+              tb_HWRITE = 1;    // Write = 1
+              tb_HWDATA = data; // Data to write
+              tb_HADDR = addr;  // Address to write to
+        
+              #50; // Wait for write operation to complete
+              #1;
+              $fwrite(file, "Time: %0t | tb_HREADY: %b | tb_HRDATA: %h\n", $time, tb_HREADY, tb_HRDATA); //define a task for read operation
+           end
+    endtask  
+
+    task read_operation(input [31:0] addr, integer file);
+         begin
+             $display("Starting Read Operation at time %0t", $time);
+             $fwrite(file, "Starting read operation at time %0t\n", $time);
+        
+             @(posedge tb_HCLK);
+             tb_HSEL = 1;
+             tb_HWRITE = 0;  // Read = 0
+             tb_HADDR = addr; // Address to read from
+        
+             #50; // Wait for read operation to complete
+             #1;
+             $fwrite(file, "Time: %0t | tb_HREADY: %b | tb_HRDATA: %h\n", $time, tb_HREADY, tb_HRDATA);
+          end
+    endtask
+
+    // Clock generation
+    initial begin
+        tb_HCLK = 0;
+        forever #5 tb_HCLK = ~tb_HCLK;
+    end
+    
+  
+    
+    // Test stimulus
+    initial begin
+        // Initialize signals
+        tb_HRESET = 1;
+        tb_HWRITE = 0;
+        tb_HSEL = 0;
+        tb_HWDATA = 32'h0;
+        tb_HADDR = 32'h0;
+        
+        // Reset period
+        #100;
+        tb_HRESET = 0;
+        #20;
+        
+        file = $fopen("deterministic_output.txt","w");
+      
+        // Generate addresses manually based on the specific pattern
+        addresses[0] = 32'h80008000;
+        addresses[1] = 32'h81FF8000;
+        addresses[2] = 32'h8000BFFF;
+        addresses[3] = 32'h81FFBFFF;
+
+
+        // senario.1: simple Write operation
+        $display("Starting Write Operation at time %0t", $time);
+        $fwrite(file,"starting write operation at time %0t\n", $time);
+        @(posedge tb_HCLK);
+        tb_HSEL = 1;
+        tb_HWRITE = 1;    // Write = 1
+        tb_HWDATA = 32'hDEADBEEF; // data
+        tb_HADDR = 32'h80000000;  // Bank 0, Row 0, Column 0
+        #50;// wait a few cycles for complete write operation - 5 cycles for write operation - each cycle is 10ns
+        #1;
+        $fwrite(file, "Time: %0t | tb_HREADY: %b | tb_HRDATA: %h\n", $time, tb_HREADY, tb_HRDATA); // write to file
+
+        // Deassert signals
+        @(posedge tb_HCLK);
+        tb_HSEL = 0;
+        tb_HWRITE = 0;
+        tb_HWDATA = 32'h0;
+        tb_HADDR = 32'h0;
+        
+        #50;
+        // senario.2: simple Read operation
+        $display("Starting Read Operation at time %0t", $time);
+        $fwrite(file,"startimg read operation at time %0t\n", $time);
+        @(posedge tb_HCLK);
+        tb_HSEL = 1;
+        tb_HWRITE = 0;  // Read = 0
+        tb_HADDR = 32'h80000000;  // Same address as write
+        #50;// wait a few cycles for complete read operation - 5 cycle for read operation
+        #1;
+        $fwrite(file, "Time:%0t | tb_HREADY: %b | tb_HRDATA: %h\n", $time, tb_HREADY, tb_HRDATA); // write to file
+
+        // senario 3: Burst write and read/write in 4 rows in a row
+        $display("Starting Burst Write and Read Operation at time %0t", $time);
+        $fwrite(file,"Starting Burst Write and Read Operation at time %0t\n", $time);
+        
+        // Deassert signals
+        @(posedge tb_HCLK);
+        tb_HSEL = 0;
+        tb_HWRITE = 0;
+        tb_HWDATA = 32'h0;
+        tb_HADDR = 32'h0;
+        
+    for (int i = 0; i < 4; i++) begin
+        @(posedge tb_HCLK);
+        tb_HSEL = 1;
+        tb_HWRITE = 1;
+        tb_HWDATA = 32'hDEADBEEF + i;
+        tb_HADDR = 32'h80000000 + i ;
+        #50;
+        #1;
+        $fwrite(file, "Time:%0t | tb_HREADY: %b | tb_HRDATA: %h\n", $time, tb_HREADY, tb_HRDATA);
+        
+    end
+
+    for (int i = 0; i < 4; i++) begin
+        @(posedge tb_HCLK);
+        tb_HSEL = 1;
+        tb_HWRITE = 0;
+        tb_HADDR = 32'h80000000 + i ;
+        #50;
+        #1;
+        $fwrite(file, "Time: %0t | tb_HREADY: %b | tb_HRDATA: %h\n", $time, tb_HREADY, tb_HRDATA);
+        
+    end
+
+       // senario 4: reset during operation
+        $display("Testing Reset During Operation at time %0t", $time);
+        $fwrite(file,"Testing Reset During Operation at time %0t\n", $time);// added for showing time in output file
+        @(posedge tb_HCLK);
+        tb_HSEL = 1;
+        tb_HWRITE = 1;
+        tb_HWDATA = 32'hCAFEBABE;
+        tb_HADDR = 32'h80000010;
+        #30;
+        tb_HRESET = 1; // Assert reset
+        #20;
+        tb_HRESET = 0; // Deassert reset
+        #50;
+        $fwrite(file, "Time: %0t | tb_HREADY: %b | tb_HRDATA: %h\n", $time, tb_HREADY, tb_HRDATA);
+        // Deassert signals
+        @(posedge tb_HCLK);
+        tb_HSEL = 0;
+        tb_HWRITE = 0;
+        tb_HWDATA = 32'h0;
+        tb_HADDR = 32'h0;
+        
+
+        // senario 5: invalid command
+        $display("Testing Invalid Commands at time %0t", $time);
+        $fwrite(file,"Testing Invalid Commands at time %0t\n", $time);
+        @(posedge tb_HCLK);
+        tb_HSEL = 1;
+        tb_HWRITE = 1'bx; // Invalid write signal
+        tb_HWDATA = 32'hD0000000;
+        tb_HADDR = 32'h80000020;
+        #50;
+        $fwrite(file, "Time: %0t | tb_HREADY: %b | tb_HRDATA: %h\n", $time, tb_HREADY, tb_HRDATA);
+
+        //senario 6: write in 4 columns in a row(in a single bank)
+        $display("Testing write operation (4 columns in a row)",$time);
+        $fwrite(file,"Testing write operation (4 columns in a row) at time %0t\n", $time);
+    for (int i = 0; i < 4; i++) begin
+        @(posedge tb_HCLK);
+        tb_HSEL = 1;
+        tb_HWRITE = 1'b1;
+        tb_HWDATA = 32'hBEEB0000 + i;
+        tb_HADDR = 32'h8000C000 + (i*32'h10000); 
+        #50;
+        #1;
+        $fwrite(file, "Time: %0t | tb_HREADY: %b | tb_HRDATA: %h\n", $time, tb_HREADY, tb_HRDATA);
+    end
+        
+    for (int i = 0; i < 4; i++) begin
+         @(posedge tb_HCLK);
+         tb_HSEL = 1;
+         tb_HWRITE = 1'b0;
+         tb_HADDR = 32'h8000C000 + (i*32'h10000);
+         #50;
+         #1;
+         $fwrite(file, "Time: %0t | tb_HREADY: %b | tb_HRDATA: %h\n", $time, tb_HREADY, tb_HRDATA);
+    end
+       
+        //senario 7: write in 4 corners of a bank
+        $display("Testing write in 4 corners of a bank",$time);
+        $fwrite(file,"Testing write in 4 corners of a bank %0t\n",$time);
+     for (int i = 0; i < 4; i++) begin
+          @(posedge tb_HCLK);
+          tb_HSEL = 1;
+          tb_HWRITE = 1'b1;
+          tb_HWDATA = 32'hCEEB0000 + i;
+          tb_HADDR = addresses[i];
+          #50;
+          #1;
+          $fwrite(file, "Time: %0t | tb_HREADY: %b | tb_HRDATA: %h\n", $time, tb_HREADY, tb_HRDATA);
+     end
+         #5;
+        
+     for (int i = 0; i < 4; i++) begin
+          @(posedge tb_HCLK);
+          tb_HSEL = 1;
+          tb_HWRITE = 1'b0;
+          tb_HADDR = addresses[i];
+          #50;
+          #1;
+          $fwrite(file, "Time: %0t | tb_HREADY: %b | tb_HRDATA: %h\n", $time, tb_HREADY, tb_HRDATA);
+     end
+        
+        //senario 8: test the 5 invalid bits in address format
+        $display("Testing 5 invalid bits in address format",$time);
+        $fwrite(file,"Testing 5 invalid bits in addr format: %0t\n",$time);
+        //write to row 8 col 0 from bank0
+        address = generate_address(5'b11000,9'b000000000,2'b00,14'b00000000001000);//generate an address using func with direct bit values
+        write_operation(address,32'h00000001,file);
+        //read from row 8 col 0 from bank0
+        address = generate_address(5'b01000,9'b000000000,2'b00,14'b00000000001000);
+        read_operation(address,file);
+        
+        //write to row 9 col 0 from bank0
+        write_operation(32'hA8000009,32'h00000002,file);
+        //write to row 9 col 0 from bank0
+        read_operation(32'hA0000009,file);
+
+        //senario 9: write to first place of each bank(row0,col0)
+        $display("Testing write to the first place of each bank",$time);
+        $fwrite(file,"Testing write to the first place of each bank: %0t\n",$time);
+        address = generate_address(5'b00000,9'b000000000,2'b00,14'b00000000000000);
+        write_operation(address,32'hABB01010,file);
+        read_operation(address,file);
+        address = generate_address(5'b00000,9'b000000000,2'b01,14'b00000000000000);
+        write_operation(address,32'hABB01011,file);
+        read_operation(address,file);
+        address = generate_address(5'b00000,9'b000000000,2'b10,14'b00000000000000);
+        write_operation(address,32'hABB01012,file);
+        read_operation(address,file);
+        address = generate_address(5'b00000,9'b000000000,2'b11,14'b00000000000000);
+        write_operation(address,32'hABB01013,file);
+        read_operation(address,file);
+        
+        $display("Testing random write/read",$time);
+        for (int i = 0; i < 10; i++) begin
+             // Generate address using the random values
+              tb_HADDR = $random;
+              tb_HWDATA = $random;
+
+              // Perform a random write operation
+              write_operation(tb_HADDR, tb_HWDATA, file);
+
+              // Perform a random read operation
+              read_operation(tb_HADDR, file);
+        end
+        $fclose(file);
+       
+    end
+    
+    
+
+endmodule

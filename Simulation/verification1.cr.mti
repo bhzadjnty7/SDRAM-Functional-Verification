@@ -1,0 +1,74 @@
+D:/codeverify1/sdram_model.v {1 {vlog -work work -vopt -covercells -cover sbcef4 -stats=none D:/codeverify1/sdram_model.v
+Model Technology ModelSim SE-64 vlog 2020.4 Compiler 2020.10 Oct 13 2020
+-- Compiling module sdram_model
+
+Top level modules:
+	sdram_model
+
+} {} {}} D:/codeverify1/scoreboard.sv {1 {vlog -work work -vopt -sv -stats=none D:/codeverify1/scoreboard.sv
+Model Technology ModelSim SE-64 vlog 2020.4 Compiler 2020.10 Oct 13 2020
+-- Compiling module sdram_scoreboard
+
+Top level modules:
+	sdram_scoreboard
+
+} {} {}} D:/codeverify1/checker.sv {1 {vlog -work work -vopt -sv -stats=none D:/codeverify1/checker.sv
+Model Technology ModelSim SE-64 vlog 2020.4 Compiler 2020.10 Oct 13 2020
+-- Compiling module Checker
+
+Top level modules:
+	Checker
+
+} {} {}} D:/codeverify1/random_stimuli_generator.sv {2 {vlog -work work -vopt -sv -covercells -cover sbcef4 -stats=none D:/codeverify1/random_stimuli_generator.sv
+Model Technology ModelSim SE-64 vlog 2020.4 Compiler 2020.10 Oct 13 2020
+-- Compiling module sdram_top_tb2
+** Warning: D:/codeverify1/random_stimuli_generator.sv(169): (vlog-2244) Variable 'seed' is implicitly static. You must either explicitly declare it as static or automatic
+or remove the initialization in the declaration of variable.
+
+Top level modules:
+	sdram_top_tb2
+
+} {} {}} D:/codeverify1/sdram_assertions.sv {2 {vlog -work work -vopt -sv -covercells -cover sbcef4 -stats=none D:/codeverify1/sdram_assertions.sv
+Model Technology ModelSim SE-64 vlog 2020.4 Compiler 2020.10 Oct 13 2020
+-- Compiling module sdram_assertions
+** Warning: D:/codeverify1/sdram_assertions.sv(49): (vlog-2565) Property p_hready_high_on_reset asserted multiple times, previously asserted at D:/codeverify1/sdram_assertions.sv:41.
+
+Top level modules:
+	sdram_assertions
+
+} {} {}} D:/codeverify1/testbench.v {1 {vlog -work work -vopt -sv -covercells -cover sbcef4 -stats=none {D:\codeverify1\testbench.v}
+Model Technology ModelSim SE-64 vlog 2020.4 Compiler 2020.10 Oct 13 2020
+-- Compiling module sdram_top_tb
+
+Top level modules:
+	sdram_top_tb
+
+} {} {}} D:/codeverify1/functional_coverage.sv {1 {vlog -work work -vopt -sv -stats=none D:/codeverify1/functional_coverage.sv
+Model Technology ModelSim SE-64 vlog 2020.4 Compiler 2020.10 Oct 13 2020
+-- Compiling module functional_coverage
+
+Top level modules:
+	functional_coverage
+
+} {} {}} D:/codeverify1/sdram_top.v {1 {vlog -work work -vopt -covercells -cover sbcef4 -stats=none D:/codeverify1/sdram_top.v
+Model Technology ModelSim SE-64 vlog 2020.4 Compiler 2020.10 Oct 13 2020
+-- Compiling module sdram_top
+
+Top level modules:
+	sdram_top
+
+} {} {}} D:/codeverify1/sdram_controller.v {1 {vlog -work work -vopt -covercells -cover sbcef4 -stats=none D:/codeverify1/sdram_controller.v
+Model Technology ModelSim SE-64 vlog 2020.4 Compiler 2020.10 Oct 13 2020
+-- Compiling module sdram_controller
+
+Top level modules:
+	sdram_controller
+
+} {} {}} D:/codeverify1/Golden_Model_sdram.sv {1 {vlog -work work -vopt -sv -stats=none D:/codeverify1/Golden_Model_sdram.sv
+Model Technology ModelSim SE-64 vlog 2020.4 Compiler 2020.10 Oct 13 2020
+-- Compiling module Golden_Model_sdram
+
+Top level modules:
+	Golden_Model_sdram
+
+} {} {}}
