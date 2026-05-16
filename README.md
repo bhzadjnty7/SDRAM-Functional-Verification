@@ -109,6 +109,58 @@ The following figure illustrates the SDRAM architecture and internal modules use
 
 <p align="center"> <img src="images/sdram_architecture.jpg" width="700"> </p>
 
+
+## Modules
+
+### 1. SDRAM Model
+* Purpose: Simulates the behavior of an SDRAM chip.
+* Key Features:
+   * Memory array divided into banks, rows, and columns.
+   * Handles read and write operations based on control signals (CS, RAS, CAS, WE).
+  
+### 2. SDRAM Controller
+* Purpose: Manages read/write requests and interacts with the SDRAM model.
+* Key Features:
+  * Implements a finite state machine (FSM) for SDRAM operations.
+  * Decodes address into bank, row, and column.
+  * Ensures timing constraints of SDRAM commands.
+  
+### 3. Stimuli
+* Purpose: Generates predefined test scenarios for SDRAM testing.
+* Key Features:
+  * Includes tasks for initialization, sequential writing, and reading.
+  * Covers specific scenarios like timing-based writes and invalid commands.
+  
+### 4. RandomStimuli
+* Purpose: Provides randomized inputs for robust testing.
+* Key Features:
+  * Randomly generates control signals, addresses, and data.
+  * Ensures edge-case testing and corner-case validation.
+  
+### 5. GoldenModel
+* Purpose: Serves as the reference implementation of SDRAM behavior.
+* Key Features:
+  * Simple memory model that mimics SDRAM functionality.
+  * Used to verify the correctness of the DUT (Device Under Test).
+  
+### 6. Checker
+* Purpose: Compares outputs of the DUT and Golden Model to detect mismatches.
+* Key Features:
+  * Highlights any discrepancies between expected and actual outputs.
+  * Logs errors for debugging.
+  
+### 7. Scoreboard
+Purpose: Tracks the performance and coverage of the testbench.
+* Key Features:
+   *  Counts the number of reads, writes, and errors.
+   * Measures test coverage based on executed scenarios.
+  
+### 8. Testbench (sdram_top_tb.v)
+* Purpose: Integrates all modules into a unified testing environment.
+* Key Features:
+  * Orchestrates stimuli, DUT, Golden Model, Checker, and Scoreboard.
+  * Executes simulations and logs results for analysis.
+
 ## ModelSim Waveform Results
 
 The waveform below demonstrates successful SDRAM write/read operations and validates correct timing behavior between the DUV and Golden Model.
