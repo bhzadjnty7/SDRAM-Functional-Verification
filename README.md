@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0f2027,50:203a43,100:2c5364&height=200&section=header&text=Design%20Validation%20for%20HDL%20Models&fontSize=35&fontColor=ffffff&animation=fadeIn&fontAlignY=35"/>
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:6a0dad,50:7b2cbf,100:9d4edd&height=200&section=header&text=Design%20Validation%20for%20HDL%20Models&fontSize=35&fontColor=ffffff&animation=fadeIn&fontAlignY=35"/>
 </p>
 
 # SDRAM-Functional-Verification-Project
