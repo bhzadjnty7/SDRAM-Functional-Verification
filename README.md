@@ -198,6 +198,18 @@ Coverage analysis was performed using ModelSim coverage tools.
 * Built checker and scoreboard modules
 * Achieved full functional coverage
 * Performed comprehensive code coverage analysis
+
+## 👨‍💻 Author
+
+**Behzad Jannati**
+M.Sc. Student – Computer Architecture
+University of Tehran
+
+GitHub: [https://github.com/bhzadjnty7](https://github.com/bhzadjnty7)
+
+Linkedin: [www.linkedin.com/in/behzadjannati](www.linkedin.com/in/behzadjannati)
+
+
 ## License
 
 This project is intended for educational and academic purposes.
