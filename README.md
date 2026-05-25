@@ -216,3 +216,7 @@ This project is intended for educational and academic purposes.
 
 
 ---
+
+## ⭐️ Support
+
+If you find this repository useful, consider giving it a ⭐️
